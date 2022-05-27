@@ -96,119 +96,205 @@
             </div>
             <!-- /.card -->
 
-            <!-- About Me Box -->
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title"><i class="fa fa-calendar-check"></i> Appointment History</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-              <?php
-                $query1=mysqli_query($con,"select * from appointment natural join owner where owner_id='$id' order by appointment_date desc")or die(mysqli_error($con));
-                  while($row1=mysqli_fetch_array($query1))
-                    {
-                      $aid=$row1['appointment_id'];
-                ?>
-                <strong><i class="fas fa-calendar mr-1"></i> <?php echo date('F d, Y',strtotime($row1['appointment_date']));?></strong>
-                
-                <p class="text-muted">
-                <?php
-                $query2=mysqli_query($con,"select * from appointment_details natural join product where appointment_id='$aid' order by prod_name")or die(mysqli_error($con));
-                  while($row2=mysqli_fetch_array($query2))
-                    {
-                      $status=$row1['appointment_status'];
-                      if ($status=="Pending"){$color="warning";}
-                      if ($status=="Approved"){$color="primary";}
-                      if ($status=="Cancelled"){$color="danger";}
-                      if ($status=="Done"){$color="success";}
-                ?>
-                  <span class="tag tag-danger"><?php echo $row2['prod_name'];?> </span>
-                  <?php }?>
-                </p>
-                <a href="#" class="btn btn-<?php echo $color;?> btn-sm"><?php echo $row1['appointment_status'];?></a>
-                <hr>
-              <?php }?>  
-              </div>
-              <!-- /.card-body -->
-            </div>
+           
             <!-- /.card -->
           </div>
           <!-- /.col -->
-          <div class="col-md-6">
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title"><i class="fa fa-paw"></i> Pet Record </h3>
-              </div>
-              <!-- /.card-header -->
+          <div class="col-md-9">
+            <div class="card">
+              <div class="card-header p-2">
+                <ul class="nav nav-pills">
+                  <li class="nav-item"><a class="nav-link active" href="#consultation" data-toggle="tab">Consultation</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#history" data-toggle="tab">Medical History</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#services" data-toggle="tab">Services</a></li>
+                </ul>
+              </div><!-- /.card-header -->
               <div class="card-body">
-                <div class="row">
-                <?php
-                $queryp=mysqli_query($con,"select * from pet natural join breed natural join species where owner_id='$id'")or die(mysqli_error($con));
-                  while($rowp=mysqli_fetch_array($queryp))
-                    {
-                ?>
-                  <div class="col-sm-4">
-                    <div class="position-relative p-3 bg-gray" style="height: 180px">
-                      <div class="ribbon-wrapper">
-                        <div class="ribbon bg-success">
-                          <?php echo $rowp['species_name'];?>
+                <div class="tab-content">
+                  <div class="tab-pane" id="history">
+                    <!-- Post -->
+                    <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Weight</th>
+                      <th>Temperature</th>
+                      <th>Physical Exam/ Findings</th>
+                      <th>Remarks</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <?php
+                    $querymed=mysqli_query($con,"select * from medical_record where pet_id='$id' order by mr_date desc")or die(mysqli_error($con));
+                        while($rowmed=mysqli_fetch_array($querymed))
+                        {
+                  ?>
+                    <tr data-widget="expandable-table" aria-expanded="true">
+                      <td><?php echo $rowmed['mr_date'];?></td>
+                      <td><?php echo $rowmed['mr_wt'];?></td>
+                      <td><?php echo $rowmed['mr_temp'];?></td>
+                      <td><?php echo $rowmed['mr_pe'];?></td>
+                      <td><?php echo $rowmed['mr_remarks'];?></td>
+                    </tr>
+                    <tr class="expandable-body">
+                      <td colspan="5">
+                        <p style="">
+                          <?php echo $rowmed['mr_treatment'];?>
+                        </p>
+                      </td>
+                    </tr>
+                    <?php }?>
+                  </tbody>
+                </table>
+                    <!-- /.post -->
+
+                   
+
+
+                  
+                  </div>
+                  <!-- /.tab-pane -->
+                  <div class="tab-pane" id="services">
+                    <div class="row">
+                      <!-- The timeline -->
+                      <div class="col-4">
+                        <form class="form-horizontal" method="post" action="functions.php">
+                          <div class="form-group row">
+                            <label for="inputName" class="col-sm-4 col-form-label">Date</label>
+                            <div class="col-sm-8">
+                              <input type="date" class="form-control" id="inputName" placeholder="Date of Consultation" name="date">
+                              <input type="hidden" class="form-control" id="inputName" placeholder="Date of Consultation" name="id" value="<?php echo $id;?>">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="inputEmail" class="col-sm-4 col-form-label">Service</label>
+                            <div class="col-sm-8">
+                              <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" name="service" placeholder="Select Product to stockin" required>
+                                <?php
+
+                                  $query2=mysqli_query($con,"select * from product where prod_type='Service' order by prod_name")or die(mysqli_error($con));
+                                      while($row2=mysqli_fetch_array($query2)){
+                                  ?>
+                                      <option value="<?php echo $row2['prod_id'];?>"><?php echo $row2['prod_name'];?></option>
+                                <?php }?>
+                                </select>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="inputExperience" class="col-sm-4 col-form-label">Medicine/Vaccine</label>
+                            <div class="col-sm-8">
+                              <textarea class="form-control" id="inputExperience" placeholder="Medicine/Drug/Vaccine Used" name="medicine"></textarea>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="inputExperience" class="col-sm-4 col-form-label">Due Date</label>
+                            <div class="col-sm-8">
+                              <input type="date" class="form-control" id="inputName" placeholder="Date of Consultation" name="due">
+                            </div>
+                          </div>
+                          
+                          
+                          <div class="form-group row">
+                            <div class="offset-sm-4 col-sm-8">
+                              <button type="submit" class="btn btn-danger" name="add_service_record">Save</button>
+                              <button type="reset" class="btn btn-default">Clear</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="col-8">
+                        
+                          <table class="table table-head-fixed text-nowrap">
+                            <thead>
+                              <tr>
+                                <th>Date</th>
+                                <th>Service</th>
+                                <th>Medicine/Vaccine</th>
+                                <th>Due Date</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+
+                                  $querysr=mysqli_query($con,"select * from service_history natural join product where pet_id='$id' order by service_date desc")or die(mysqli_error($con));
+                                      while($rowsr=mysqli_fetch_array($querysr)){
+                                  ?>
+                              <tr>
+                                <td><?php echo $rowsr['service_date'];?></td>
+                                <td><?php echo $rowsr['prod_name'];?></td>
+                                <td><?php echo $rowsr['medicine'];?></td>
+                                <td><?php echo $rowsr['due_date'];?></td>
+                              </tr>
+                              <?php }?>
+                              
+                            </tbody>
+                          </table>
+                        </div>
+                      <!-- The timeline -->
+                      
+                    </div>
+                      
+
+                  </div>
+                  <!-- /.tab-pane -->
+
+                  <div class="tab-pane active" id="consultation">
+                    <form class="form-horizontal" method="post" action="functions.php">
+                      <div class="form-group row">
+                        <label for="inputName" class="col-sm-2 col-form-label">Date</label>
+                        <div class="col-sm-10">
+                          <input type="date" class="form-control" id="inputName" placeholder="Date of Consultation" name="date" required>
+                          <input type="hidden" class="form-control" id="inputName" placeholder="Date of Consultation" name="id" value="<?php echo $id;?>" required>
                         </div>
                       </div>
-                       <?php echo $rowp['pet_name'];?> <br>
-                      <small> <?php echo $rowp['breed_name'];?></small><br>
-                      <small> <?php echo $rowp['pet_gender'];?></small><br>
-                      <small> <?php echo date('F d, Y',strtotime($rowp['pet_bday']));?></small><br>
-                      <small> <a href="pet_profile.php?pid=<?php echo $rowp['pet_id'];?>"><i class="fa fa-eye"></i> View Record</a></small>
-                    </div>
+                      <div class="form-group row">
+                        <label for="inputEmail" class="col-sm-2 col-form-label">Weight</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inputEmail" placeholder="Pet's Weight" name="weight">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="inputName2" class="col-sm-2 col-form-label">Temperature</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inputName2" placeholder="Pet's Temperature" name="temp">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="inputExperience" class="col-sm-2 col-form-label">Physical Exam/Findings</label>
+                        <div class="col-sm-10">
+                          <textarea class="form-control" id="inputExperience" placeholder="Physical Exam/Findings" name="pe"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="inputExperience" class="col-sm-2 col-form-label">Treatment</label>
+                        <div class="col-sm-10">
+                          <textarea class="form-control" id="inputExperience" placeholder="Treatment Needed" name="treatment"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="inputExperience" class="col-sm-2 col-form-label">Remarks</label>
+                        <div class="col-sm-10">
+                          <textarea class="form-control" id="inputExperience" placeholder="Remarks" name="remarks"></textarea>
+                        </div>
+                      </div>
+                      
+                      <div class="form-group row">
+                        <div class="offset-sm-2 col-sm-10">
+                          <button type="submit" class="btn btn-danger" name="add_record">Save</button>
+                          <button type="reset" class="btn btn-default">Clear</button>
+                        </div>
+                      </div>
+                    </form>
                   </div>
-                <?php }?>  
-                 
-              </div>
-              <!-- /.card-body -->
+                  <!-- /.tab-pane -->
+                </div>
+                <!-- /.tab-content -->
+              </div><!-- /.card-body -->
             </div>
-
             <!-- /.card -->
           </div>
         
-          <div class="col-md-3">
-            <div class="card card-danger shadow-lg">
-              <div class="card-header border-0">
-                <h3 class="card-title">
-                  <i class="fas fa-map-marker-alt mr-1"></i>
-                  Add Medical Record
-                </h3>
-              </div>
-              <div class="card-body">
-                <form method="post" action="functions.php" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Date</label>
-                    <input type="date" class="form-control" id="exampleInputEmail1" placeholder="Enter Name of Pet" name="date" required>
-                    <input type="hidden" class="form-control" id="exampleInputEmail1" value="<?php echo $id;?>" name="id" required>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Weight</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Name of Pet" name="date" required>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Temperature</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Name of Pet" name="date" required>
-                </div>
-                
-                
-              </div>
-              <!-- /.card-body-->
-              <div class="card-footer bg-transparent">
-                <div class="row">
-                  <div class="col-12 text-center">
-                    <button type="submit" class="btn btn-success btn-block" name="add_record"><i class="fa fa-save"></i> Save</button>
-                  </div>
-                </div>
-                <!-- /.row -->
-              </div>
-              </form>
-            </div>
-          </div>
-          <!-- /.col -->
+        
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2022 at 01:41 PM
+-- Generation Time: May 27, 2022 at 06:31 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -97,6 +97,32 @@ CREATE TABLE `breed` (
 INSERT INTO `breed` (`breed_id`, `breed_name`) VALUES
 (1, 'Labrador'),
 (2, 'Persian Cat');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `medical_record`
+--
+
+CREATE TABLE `medical_record` (
+  `mr_id` int(11) NOT NULL,
+  `mr_date` date NOT NULL,
+  `mr_wt` decimal(6,2) NOT NULL,
+  `mr_temp` decimal(6,2) NOT NULL,
+  `mr_pe` varchar(500) NOT NULL,
+  `mr_treatment` varchar(500) NOT NULL,
+  `mr_remarks` varchar(500) NOT NULL,
+  `pet_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `medical_record`
+--
+
+INSERT INTO `medical_record` (`mr_id`, `mr_date`, `mr_wt`, `mr_temp`, `mr_pe`, `mr_treatment`, `mr_remarks`, `pet_id`) VALUES
+(1, '2022-05-27', '5.00', '35.00', 'Weak', 'Needs deworming', 'Cheche', 3),
+(2, '2022-05-28', '0.00', '0.00', '', '', '', 3),
+(3, '2022-05-28', '0.00', '0.00', '', '', '', 3);
 
 -- --------------------------------------------------------
 
@@ -228,6 +254,30 @@ CREATE TABLE `sales_details` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `service_history`
+--
+
+CREATE TABLE `service_history` (
+  `service_id` int(11) NOT NULL,
+  `prod_id` int(11) NOT NULL,
+  `service_date` date NOT NULL,
+  `due_date` date NOT NULL,
+  `pet_id` int(11) NOT NULL,
+  `medicine` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `service_history`
+--
+
+INSERT INTO `service_history` (`service_id`, `prod_id`, `service_date`, `due_date`, `pet_id`, `medicine`) VALUES
+(1, 7, '2022-05-28', '2022-06-04', 3, 'fsdfs'),
+(2, 7, '2022-05-28', '2022-06-04', 3, 'fsdfs'),
+(3, 2, '2022-06-04', '2022-06-11', 3, 'testing');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `species`
 --
 
@@ -311,41 +361,6 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`user_id`, `user_first`, `user_last`, `username`, `user_pass`, `user_type`, `user_pic`) VALUES
 (1, 'John', 'Doe', 'admin', '202cb962ac59075b964b07152d234b70', 'Admin', '../dist/img/avatar3.png');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `vaccination`
---
-
-CREATE TABLE `vaccination` (
-  `vax_id` int(11) NOT NULL,
-  `vax_date` date NOT NULL,
-  `vax_due` date NOT NULL,
-  `vaccine_id` int(11) NOT NULL,
-  `pet_weight` decimal(6,2) NOT NULL,
-  `pet_temp` decimal(6,2) NOT NULL,
-  `pet_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `vaccine`
---
-
-CREATE TABLE `vaccine` (
-  `vaccine_id` int(11) NOT NULL,
-  `vaccine_name` varchar(100) NOT NULL,
-  `vaccine_price` decimal(6,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `vaccine`
---
-
-INSERT INTO `vaccine` (`vaccine_id`, `vaccine_name`, `vaccine_price`) VALUES
-(1, 'ANtititanus', '160.00');
-
 --
 -- Indexes for dumped tables
 --
@@ -367,6 +382,12 @@ ALTER TABLE `appointment_details`
 --
 ALTER TABLE `breed`
   ADD PRIMARY KEY (`breed_id`);
+
+--
+-- Indexes for table `medical_record`
+--
+ALTER TABLE `medical_record`
+  ADD PRIMARY KEY (`mr_id`);
 
 --
 -- Indexes for table `owner`
@@ -399,6 +420,12 @@ ALTER TABLE `sales_details`
   ADD PRIMARY KEY (`sales_details_id`);
 
 --
+-- Indexes for table `service_history`
+--
+ALTER TABLE `service_history`
+  ADD PRIMARY KEY (`service_id`);
+
+--
 -- Indexes for table `species`
 --
 ALTER TABLE `species`
@@ -423,18 +450,6 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- Indexes for table `vaccination`
---
-ALTER TABLE `vaccination`
-  ADD PRIMARY KEY (`vax_id`);
-
---
--- Indexes for table `vaccine`
---
-ALTER TABLE `vaccine`
-  ADD PRIMARY KEY (`vaccine_id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -455,6 +470,12 @@ ALTER TABLE `appointment_details`
 --
 ALTER TABLE `breed`
   MODIFY `breed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `medical_record`
+--
+ALTER TABLE `medical_record`
+  MODIFY `mr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `owner`
@@ -487,6 +508,12 @@ ALTER TABLE `sales_details`
   MODIFY `sales_details_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `service_history`
+--
+ALTER TABLE `service_history`
+  MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `species`
 --
 ALTER TABLE `species`
@@ -509,18 +536,6 @@ ALTER TABLE `stockout`
 --
 ALTER TABLE `user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `vaccination`
---
-ALTER TABLE `vaccination`
-  MODIFY `vax_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `vaccine`
---
-ALTER TABLE `vaccine`
-  MODIFY `vaccine_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

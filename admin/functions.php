@@ -363,6 +363,36 @@ if (isset($_POST['add_pet']))
 	echo "<script>document.location='owner_profile.php?id=$id'</script>";   
 	
 }
+//Add Medical Record
+if (isset($_POST['add_record']))
+{
+	$date = $_POST['date'];
+	$wt = $_POST['weight'];
+	$temp = $_POST['temp'];
+	$pe = $_POST['pe'];
+	$treatment = $_POST['treatment'];
+	$remarks = $_POST['remarks'];
+	$id = $_POST['id'];
+	
+	mysqli_query($con,"INSERT INTO medical_record(mr_date,mr_wt,mr_temp,mr_pe,mr_treatment,mr_remarks,pet_id) VALUES('$date','$wt','$temp','$pe','$treatment','$remarks','$id')")or die(mysqli_error());  
+	echo "<script type='text/javascript'>alert('Successfully added new medical record!');</script>";
+	echo "<script>document.location='pet_profile.php?pid=$id'</script>";   
+	
+}
+//Add Service Record
+if (isset($_POST['add_service_record']))
+{
+	$date = $_POST['date'];
+	$due = $_POST['due'];
+	$medicine = $_POST['medicine'];
+	$service = $_POST['service'];
+	$id = $_POST['id'];
+	
+	mysqli_query($con,"INSERT INTO service_history(prod_id,pet_id,service_date,due_date,medicine) VALUES('$service','$id','$date','$due','$medicine')")or die(mysqli_error());  
+	echo "<script type='text/javascript'>alert('Successfully added new service record!');</script>";
+	echo "<script>document.location='pet_profile.php?pid=$id#services'</script>";   
+	
+}
 ?>
 
 
