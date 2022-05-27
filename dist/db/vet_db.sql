@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2022 at 03:47 AM
+-- Generation Time: May 27, 2022 at 01:41 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -87,17 +87,16 @@ INSERT INTO `appointment_details` (`appointment_details_id`, `appointment_id`, `
 
 CREATE TABLE `breed` (
   `breed_id` int(11) NOT NULL,
-  `breed_name` varchar(50) NOT NULL,
-  `species_id` int(11) NOT NULL
+  `breed_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `breed`
 --
 
-INSERT INTO `breed` (`breed_id`, `breed_name`, `species_id`) VALUES
-(1, 'Labrador', 1),
-(2, 'Persian Cat', 2);
+INSERT INTO `breed` (`breed_id`, `breed_name`) VALUES
+(1, 'Labrador'),
+(2, 'Persian Cat');
 
 -- --------------------------------------------------------
 
@@ -164,7 +163,9 @@ CREATE TABLE `pet` (
 
 INSERT INTO `pet` (`pet_id`, `pet_name`, `species_id`, `breed_id`, `pet_gender`, `pet_bday`, `owner_id`) VALUES
 (1, 'Khen', 1, 1, 'Male', '2022-05-03', 19),
-(2, 'Pache', 1, 1, 'Male', '2021-02-03', 19);
+(2, 'Pache', 5, 1, 'Male', '2021-02-03', 1),
+(3, 'hjh', 2, 1, 'Male', '2022-05-17', 1),
+(4, 'Heiress', 3, 2, 'Female', '2022-01-07', 1);
 
 -- --------------------------------------------------------
 
@@ -232,17 +233,19 @@ CREATE TABLE `sales_details` (
 
 CREATE TABLE `species` (
   `species_id` int(11) NOT NULL,
-  `species_name` varchar(50) NOT NULL
+  `species_name` varchar(50) NOT NULL,
+  `species_pic` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `species`
 --
 
-INSERT INTO `species` (`species_id`, `species_name`) VALUES
-(1, 'Dog'),
-(2, 'Cat'),
-(3, 'Rabbit');
+INSERT INTO `species` (`species_id`, `species_name`, `species_pic`) VALUES
+(1, 'Dog', ''),
+(2, 'Cat', 'cat.jpg'),
+(3, 'Rabbit', 'rabbit.jpg'),
+(5, 'Hamster', '3.jpg');
 
 -- --------------------------------------------------------
 
@@ -463,7 +466,7 @@ ALTER TABLE `owner`
 -- AUTO_INCREMENT for table `pet`
 --
 ALTER TABLE `pet`
-  MODIFY `pet_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `pet_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -487,7 +490,7 @@ ALTER TABLE `sales_details`
 -- AUTO_INCREMENT for table `species`
 --
 ALTER TABLE `species`
-  MODIFY `species_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `species_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `stockin`

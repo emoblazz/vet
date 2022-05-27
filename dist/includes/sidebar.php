@@ -41,7 +41,7 @@
           </li>
           <li class="nav-item">
             <a href="stockin.php" class="nav-link">
-              <i class="nav-icon fas fa-map-pin"></i>
+              <i class="nav-icon fa fa-arrow-down"></i>
               <p>
                 Stockin
                 <span class="right badge badge-danger">New</span>
@@ -50,7 +50,7 @@
           </li>
           <li class="nav-item">
             <a href="stockout.php" class="nav-link">
-              <i class="nav-icon fas fa-map-pin"></i>
+              <i class="nav-icon fa fa-arrow-right"></i>
               <p>
                 Stockout
                 <span class="right badge badge-danger">New</span>
@@ -59,7 +59,7 @@
           </li>
           <li class="nav-item">
             <a href="pos.php" class="nav-link">
-              <i class="nav-icon fas fa-map-pin"></i>
+              <i class="nav-icon fa fa-credit-card"></i>
               <p>
                 Point of Sale
                 <span class="right badge badge-danger">New</span>
@@ -110,18 +110,9 @@
           </li>
           <li class="nav-item">
             <a href="appointment.php" class="nav-link">
-              <i class="nav-icon fas fa-map-pin"></i>
+              <i class="nav-icon fa fa-calendar"></i>
               <p>
                 Appointments
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="admin.php" class="nav-link">
-              <i class="nav-icon fas fa-map-pin"></i>
-              <p>
-                Consultation
                 <span class="right badge badge-danger">New</span>
               </p>
             </a>

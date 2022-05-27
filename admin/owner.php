@@ -90,6 +90,7 @@
                     <td><?php echo $row['owner_occupation'];?>
                     </td>
                     <td>
+                      <a class="btn text-primary" href="owner_profile.php?id=<?php echo $id;?>"><i class="fas fa-eye"></i></a>
                       <a class="btn text-success" data-toggle="modal" data-target="#modal-default<?php echo $id;?>"><i class="fas fa-edit"></i></a>
                       <a class="btn text-danger" data-toggle="modal" data-target="#modal-delete<?php echo $id;?>"><i class="fas fa-trash"></i></a>
                     </td>

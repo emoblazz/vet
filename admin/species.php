@@ -64,6 +64,7 @@
                   <tr>
                     <th>#</th>
                     <th>Species</th>
+                    <th>Picture</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -80,6 +81,7 @@
                   <tr>
                     <td><?php echo $i;?></td>
                     <td><?php echo $species;?>
+                    <td><img src="../dist/img/<?php echo $row['species_pic'];?>" style="width: 100px">
                     </td>
                     <td>
                       <a class="btn text-success" data-toggle="modal" data-target="#modal-default<?php echo $id;?>"><i class="fas fa-edit"></i></a>
@@ -147,6 +149,7 @@
                   <tr>
                     <th>#</th>
                     <th>Species</th>
+                    <th>Picture</th>
                     <th>Action</th>
                   </tr>
                   </tfoot>
@@ -168,10 +171,14 @@
                 </h3>
               </div>
               <div class="card-body">
-                <form method="post" action="functions.php">
+                <form method="post" action="functions.php" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Species</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Species Name" name="species" required>
+                </div>
+                <div class="form-group">
+                    <label for="customFile">Image</label>
+                    <input type="file" class="form-control" id="customFile" placeholder="Enter Product Image" name="picture">
                 </div>
               </div>
               <!-- /.card-body-->

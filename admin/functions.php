@@ -6,9 +6,9 @@ include('../dist/includes/dbcon.php');
 if (isset($_POST['add_breed']))
 {
 	$breed = $_POST['breed'];
-	$species = $_POST['species'];
+	//$species = $_POST['species'];
 	
-	mysqli_query($con,"INSERT INTO breed(breed_name,species_id) VALUES('$breed','$species')")or die(mysqli_error());  
+	mysqli_query($con,"INSERT INTO breed(breed_name) VALUES('$breed')")or die(mysqli_error());  
 	//echo "<script type='text/javascript'>alert('Successfully added new category!');</script>";
 	echo "<script>document.location='breed.php'</script>";   
 	
@@ -37,12 +37,37 @@ if (isset($_POST['delete_breed']))
 if (isset($_POST['add_species']))
 {
 	$species = $_POST['species'];
-	
+	$name = $_FILES["picture"]["name"];
+			if ($name=="")
+			{	
+			$name="default.png";
+			}
+			else
+			{
+			$type = $_FILES["picture"]["type"];
+			$size = $_FILES["picture"]["size"];
+			$temp = $_FILES["picture"]["tmp_name"];
+			$error = $_FILES["picture"]["error"];
+			
+				if ($error > 0){
+					die("Error uploading file! Code $error.");
+					}
+				else{
+					if($size > 100000000000) //conditions for the file
+					{
+					die("Format is not allowed or file size is too big!");
+					}
+				else
+					  {
+					move_uploaded_file($temp, "../dist/img/".$name);
+					  }
+					}
+			}	
 	$query=mysqli_query($con,"select * from species where species_name='$species'")or die(mysqli_error($con));
 		$counter=mysqli_num_rows($query);
 		if ($counter == 0) 
 		  {	
-			mysqli_query($con,"INSERT INTO species(species_name) VALUES('$species')")or die(mysqli_error());  
+			mysqli_query($con,"INSERT INTO species(species_name,species_pic) VALUES('$species','$name')")or die(mysqli_error());  
 			echo "<script type='text/javascript'>alert('Successfully added new species!');</script>";
 			}
 		else{
