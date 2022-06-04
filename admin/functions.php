@@ -393,6 +393,55 @@ if (isset($_POST['add_service_record']))
 	echo "<script>document.location='pet_profile.php?pid=$id#services'</script>";   
 	
 }
+//Add Cart
+if (isset($_POST['add_cart']))
+{
+	$product = $_POST['product'];
+	$qty = $_POST['qty'];
+	$date=date("Y-m-d");
+
+	$query=mysqli_query($con,"select * from product where prod_id='$product'")or die(mysqli_error($con));
+        $row=mysqli_fetch_array($query);
+    $price=$row['prod_price'];
+	$subtotal=$price*$qty;
+		
+	mysqli_query($con,"INSERT INTO temp(prod_id,qty,price,subtotal) VALUES('$product','$qty','$price','$subtotal')")or die(mysqli_error($con)); 
+
+	$id=mysqli_insert_id($con);
+ 
+	//echo "<script type='text/javascript'>alert('Successfully added new sale!');</script>";	
+	echo "<script>document.location='pos.php'</script>";   
+}
+//Add Sales
+if (isset($_POST['add_sales']))
+{
+	$total = $_POST['total'];
+	$customer = $_POST['customer'];
+	$discount = $_POST['discount'];
+	$amount = $_POST['amount'];
+	$tendered = $_POST['tendered'];
+	$change = $_POST['change'];
+	$date=date("Y-m-d");
+
+	mysqli_query($con,"INSERT INTO sales(sales_date,sales_total,sales_discount,sales_due,sales_tendered,sales_change,owner_id) VALUES('$date','$total','$discount','$amount','$tendered','$change','$customer')")or die(mysqli_error($con)); 
+		$id=mysqli_insert_id($con);
+
+		$query=mysqli_query($con,"select * from temp")or die(mysqli_error($con));
+	        while($row=mysqli_fetch_array($query))
+	        {
+	        $prod_id=$row['prod_id'];	
+		    $price=$row['price'];
+			$subtotal=$row['subtotal'];
+			$qty=$row['qty'];
+		
+				mysqli_query($con,"INSERT INTO sales_details(sales_id,prod_id,sales_price,sales_qty,sales_subtotal,sales_status) VALUES('$id','$prod_id','$price','$qty','$subtotal','1')")or die(mysqli_error($con)); 
+
+			}
+
+ 			mysqli_query($con,"DELETE from temp") or die(mysqli_error()); 
+	//echo "<script type='text/javascript'>alert('Successfully added new sale!');</script>";	
+	echo "<script>document.location='invoice.php'</script>";   
+}
 ?>
 
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><?php include '../dist/includes/title.php';?> | Appointments</title>
+  <title><?php include '../dist/includes/title.php';?> | Invoice</title>
   <!-- Google Font: Source Sans Pro -->
   <?php include '../dist/includes/link.php';?>
 </head>
@@ -29,12 +29,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Owner Profile</h1>
+            <h1 class="m-0">Sales Invoice</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Appointment</li>
+              <li class="breadcrumb-item active">Sales Invoice</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -46,19 +46,14 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            <div class="callout callout-info">
-              <h5><i class="fas fa-info"></i> Note:</h5>
-              This page has been enhanced for printing. Click the print button at the bottom of the invoice to test.
-            </div>
-
-
+            
             <!-- Main content -->
             <div class="invoice p-3 mb-3">
               <!-- title row -->
               <div class="row">
                 <div class="col-12">
                   <h4>
-                    <i class="fas fa-globe"></i> AdminLTE, Inc.
+                    <i class="fas fa-globe"></i> Sann Jose Veterinary Clinic
                     <small class="float-right">Date: 2/10/2014</small>
                   </h4>
                 </div>
