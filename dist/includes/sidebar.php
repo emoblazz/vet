@@ -128,15 +128,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="inventory.php" class="nav-link">
+                <a href="inventory_report.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Inventory Report</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="report_city.php" class="nav-link">
+                <a href="sales_report.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Per City/Municipality</p>
+                  <p>Sales Report</p>
                 </a>
               </li>
               <li class="nav-item">

@@ -87,12 +87,10 @@
                     <img src="../dist/img/logo.png" style="height: 100px;float: left">
                   </div>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <h6 style="text-align: center;">Republic of the Philippines</h6>
-                    <h6 style="text-align: center;">Department of Education</h6>
-                    <h6 style="text-align: center;">Division of Negros Occidental</h6>
-                    <h5 style="text-align: center;">SAN ISIDRO NATIONAL HIGH SCHOOL</h5>
-                    <h6 style="text-align: center;">San Isidro, Pontevedra, Negros Occidental</h6><br>
-                    <h4 style="text-align: center;">Report of Tracked Users Per City/Municipality for <br> <?php if (isset($_POST['generate']))
+                    <h6 style="text-align: center;">Sann Jose Veterinary Clinic</h6>
+                    <h6 style="text-align: center;">Talisay City</h6>
+                    <h6 style="text-align: center;">Negros Occidental</h6>
+                    <h4 style="text-align: center;">Sales Report for <br> <?php if (isset($_POST['generate']))
                       { 
                         $start=$_POST['start'];
                         $_SESSION['start']=$start;
@@ -103,52 +101,38 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-lg-6 col-md-12 col-sm-12" style="">
-                    <div id="<?php if (isset($_POST['generate'])){echo "graph";}?>" style="width: 100%"></div>
-                  </div>
-                  <div class="col-lg-6 col-md-12 col-sm-12">
+                  
+                  <div class="col-lg-12 col-md-12 col-sm-12">
                     <table id="example1" class="table table-bordered table-hover">
                       <thead>
                       <tr>
-                        <th>#</th>
-                        <th>City/Municipality</th>
+                        <th>Date</th>
                         <th>Total</th>
                       </tr>
                       </thead>
                       <tbody>
                       <?php include '../dist/includes/dbcon.php';    
-                      $grandtotal=0;
+                      $grand=0;
                       if (isset($_POST['generate']))
                       {
-                      $query=mysqli_query($con,"select * from city order by city_name")or die(mysqli_error($con));
+                      $query=mysqli_query($con,"select *,SUM(sales_due) as total,date_format(sales_date, '%Y-%m-%d') as date from sales where date_format(sales_date, '%Y-%m-%d')  BETWEEN '$start' and '$end' group by date_format(sales_date, '%Y-%m-%d')")or die(mysqli_error($con));
                         $i=1;
                         while ($row=mysqli_fetch_array($query)){
-                        $id=$row['city_id'];
+                        $grand=$grand+$row['total'];
                       ?>       
 
                       <tr>
-                        <td><?php echo $i;?></td>
-                        <td><?php echo $row['city_name'];?>
-                        <td>
-                          <?php 
-                            $query1=mysqli_query($con,"select *, COUNT(*) as total,date_format(track_date, '%Y-%m-%d') as formatted_date from track natural join user where user.city_id='$id' and date_format(track_date, '%Y-%m-%d') BETWEEN '$start' and '$end' group by user.city_id;")or die(mysqli_error($con));
-                              $row1=mysqli_fetch_array($query1);
-                              $count=mysqli_num_rows($query1);
-                              if ($count>0)
-                                {echo $row1['total'];
-                                  $grandtotal=$grandtotal+$row1['total'];  
-                                }
-                              else
-                                {echo "0";}
-                          ?>
+                        <td><?php echo $row['date'];?></td>
+                        <td><?php echo $row['total'];?></td>
+                         
                       <?php $i++;}}?>  
                       </tr>
                       </tbody>
                       <tfoot>
                       <tr>
                         <th>Grand Total</th>
-                        <th></th>
-                        <th><?php echo $grandtotal;?></th>
+                       
+                        <th><?php echo number_format($grand,2);?></th>
                       </tr>
                       </tfoot>
                     </table>
