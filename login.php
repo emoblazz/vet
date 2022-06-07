@@ -5,12 +5,13 @@ include('dist/includes/dbcon.php');
 
 $user_unsafe=$_POST['username'];
 $pass_unsafe=$_POST['password'];
+$type=$_POST['type'];
 
 $username = mysqli_real_escape_string($con,$user_unsafe);
 $pass = mysqli_real_escape_string($con,$pass_unsafe);
 $pass=md5($pass);
 
-$query=mysqli_query($con,"select * from user where username='$username' and user_pass='$pass'")or die(mysqli_error($con));
+$query=mysqli_query($con,"select * from user where username='$username' and user_pass='$pass' and user_type='$type'")or die(mysqli_error($con));
 		$row=mysqli_fetch_array($query);
            $id=$row['user_id'];
            $fullname=$row['user_first'];

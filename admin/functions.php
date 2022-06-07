@@ -132,28 +132,21 @@ if (isset($_POST['add_user']))
 	include '../dist/includes/dbcon.php';
 	$last = strtoupper($_POST['last']);
 	$first = strtoupper($_POST['first']);
-	$bday = $_POST['bday'];
-	$contact = $_POST['contact'];
-	$address = strtoupper($_POST['address']);
-	$city = $_POST['city'];
-	$category = $_POST['category'];
-	$sex = $_POST['sex'];
+	//$address = strtoupper($_POST['address']);
+	//$city = $_POST['city'];
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+	$type = $_POST['type'];
 	
-	$query=mysqli_query($con,"select * from user where user_first='$first' and user_last='$last' and user_bday='$bday'")or die(mysqli_error($con));
+	$query=mysqli_query($con,"select * from user where user_first='$first' and user_last='$last'")or die(mysqli_error($con));
 		$counter=mysqli_num_rows($query);
 		if ($counter == 0) 
 		  {	
-			mysqli_query($con,"INSERT INTO user(user_last,user_first,user_bday,user_contact,user_address,city_id,cat_id,user_sex) VALUES('$last','$first','$bday','$contact','$address','$city','$category','$sex')")or die(mysqli_error($con));  
+			mysqli_query($con,"INSERT INTO user(user_last,user_first,user_type,username,user_pass) VALUES('$last','$first','$type','$username','$password')")or die(mysqli_error($con));  
 
 				$id=mysqli_insert_id($con);
 
-				$fileName = $id.'.png'; 
-				$tempDir = "../dist/img";                    // the directory to store the files
-				$filePath = $tempDir . "/" . $fileName;
-				QRcode::png($id, $filePath);         // note the second parameter
-
-				mysqli_query($con,"UPDATE user SET qrcode='$filePath' where user_id='$id'") or die(mysqli_error()); 
-
+								
 			echo "<script type='text/javascript'>alert('Successfully added new user!');</script>";
 			}
 		else{
@@ -434,14 +427,33 @@ if (isset($_POST['add_sales']))
 			$subtotal=$row['subtotal'];
 			$qty=$row['qty'];
 		
-				mysqli_query($con,"INSERT INTO sales_details(sales_id,prod_id,sales_price,sales_qty,sales_subtotal,sales_status) VALUES('$id','$prod_id','$price','$qty','$subtotal','1')")or die(mysqli_error($con)); 
+				mysqli_query($con,"INSERT INTO sales_details(sales_id,prod_id,sales_price,sales_qty,sales_subtotal) VALUES('$id','$prod_id','$price','$qty','$subtotal')")or die(mysqli_error($con)); 
 
 			}
-
+			
  			mysqli_query($con,"DELETE from temp") or die(mysqli_error()); 
 	//echo "<script type='text/javascript'>alert('Successfully added new sale!');</script>";	
-	echo "<script>document.location='invoice.php'</script>";   
+	echo "<script>document.location='invoice.php?id=$id'</script>";   
+}
+//Add Owner
+if (isset($_POST['add_owner']))
+{
+	$last = $_POST['last'];
+	$first = $_POST['first'];
+	$mobile = $_POST['mobile'];
+	$occupation = $_POST['occupation'];
+	$email = $_POST['email'];
+	$password = $_POST['password'];
+	$address = $_POST['address'];
+	$today=date("Y-m-d");
+
+	mysqli_query($con,"INSERT INTO owner(owner_last,owner_first,owner_address,owner_contact,owner_occupation,owner_email,owner_password,date_registered) VALUES('$last','$first','$address','$mobile','$occupation','$email','$password','$today')")or die(mysqli_error());  
+
+		$id=mysqli_insert_id($con);
+		echo "<script>document.location='owner_profile.php?id=$id'</script>";   
+	
 }
 ?>
+
 
 

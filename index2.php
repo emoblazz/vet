@@ -42,6 +42,15 @@
             </div>
           </div>
         </div>
+        <div class="input-group mb-3">
+          <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" name="type" placeholder="Select User Type">
+                        <option>Admin</option>
+                        <option>Vet</option>
+                    </select>
+          <div class="input-group-append">
+            
+          </div>
+        </div>
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">

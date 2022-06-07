@@ -135,7 +135,7 @@
                                     <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" name="type" placeholder="Select User Type">
                                           <option><?php echo $row['user_type'];?></option>
                                           <option>Admin</option>
-                                          <option>Staff</option>
+                                          <option>Vet/Assistant</option>
                                         
                                     </select>
                                   </div>
@@ -220,6 +220,13 @@
                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter First Name" name="first" required>
                 </div>
                 <div class="form-group">
+                    <label for="exampleInputEmail1">User Type</label>
+                    <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" name="type" placeholder="Select User Type">
+                        <option>Admin</option>
+                        <option>Vet</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="exampleInputEmail1">Username</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Username" name="username" required>
                 </div>
@@ -264,6 +271,7 @@
 <?php include '../dist/includes/script.php';?>
 <script>
   $(function () {
+    $('.select2').select2();
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]

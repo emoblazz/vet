@@ -7,7 +7,7 @@
   <!-- Google Font: Source Sans Pro -->
   <?php include '../dist/includes/link.php';?>
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body>
 <div class="wrapper">
 
   <!-- Preloader 
@@ -16,33 +16,14 @@
   </div>-->
 
   <!-- Navbar -->
-  <?php include '../dist/includes/navbar.php';?>
+  <?php // include '../dist/includes/navbar.php';?>
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <?php include '../dist/includes/sidebar.php';?>
+  <?php //include '../dist/includes/sidebar.php';?>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Sales Invoice</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Sales Invoice</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
 
-    <section class="content">
+    
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
@@ -180,18 +161,7 @@
               </div>
               <!-- /.row -->
 
-              <!-- this row will not appear when printing -->
-              <div class="row no-print">
-                <div class="col-12">
-                  <a href="invoice_print.php?id=<?php echo $id;?>" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                  <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
-                    Payment
-                  </button>
-                  <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                    <i class="fas fa-download"></i> Generate PDF
-                  </button>
-                </div>
-              </div>
+              
             </div>
             <!-- /.invoice -->
           </div><!-- /.col -->
@@ -200,7 +170,7 @@
     </section>
   </div>
   <!-- /.content-wrapper -->
-  <?php include '../dist/includes/footer.php';?>
+  <?php // include '../dist/includes/footer.php';?>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">

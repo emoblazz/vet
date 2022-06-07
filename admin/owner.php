@@ -207,7 +207,7 @@
               <div class="card-header border-0">
                 <h3 class="card-title">
                   <i class="fas fa-map-marker-alt mr-1"></i>
-                  Add New User
+                  Add New Owner
                 </h3>
               </div>
               <div class="card-body">
@@ -221,8 +221,20 @@
                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter First Name" name="first" required>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Username</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Username" name="username" required>
+                    <label for="exampleInputEmail1">Mobile #</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Mobile #" name="mobile" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Occupation</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Occupation" name="occupation" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Address</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Address" name="address" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email Address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Email Address" name="email" required>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Password</label>
@@ -234,7 +246,7 @@
               <div class="card-footer bg-transparent">
                 <div class="row">
                   <div class="col-12 text-center">
-                    <button type="submit" class="btn btn-success btn-block" name="add_user"><i class="fa fa-save"></i> Save</button>
+                    <button type="submit" class="btn btn-success btn-block" name="add_owner"><i class="fa fa-save"></i> Save</button>
                   </div>
                 </div>
                 <!-- /.row -->
