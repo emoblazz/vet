@@ -135,7 +135,7 @@ if (isset($_POST['add_user']))
 	//$address = strtoupper($_POST['address']);
 	//$city = $_POST['city'];
 	$username = $_POST['username'];
-	$password = $_POST['password'];
+	$password = md5($_POST['password']);
 	$type = $_POST['type'];
 	
 	$query=mysqli_query($con,"select * from user where user_first='$first' and user_last='$last'")or die(mysqli_error($con));
