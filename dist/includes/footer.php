@@ -1,5 +1,5 @@
   <footer class="main-footer">
-    <strong>Copyright &copy; 2022. Emoblazz <a href="">San Isidro National High School</a>.</strong>
+    <strong>Copyright &copy; 2022.  <a href="">Sann Jose Veterinary Clinic</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 1.0.0
